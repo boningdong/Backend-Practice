@@ -1,1 +1,1 @@
-web: FlaskTest:app
+web: python3 app.py
