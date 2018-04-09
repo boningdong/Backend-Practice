@@ -60,11 +60,27 @@ def save_string(str):
     db.session.add(info)
     db.session.commit()
 
+    # Print out what is left in DB
     strBuilder = ""
     entries = Info.query.order_by(Info.info).all() # Essentially, Info tells which database to query.
     for entry in entries:
         strBuilder += entry.toString()
+    strBuilder += '\n'
+    return strBuilder
 
+@app.route('/removestring/<string:str>', methods = ['POST'])
+def remove_string(str):
+    deleteItem = Info.query.filter_by(info=str).first()
+    if deleteItem != None:
+        db.session.delete(deleteItem)
+        db.session.commit()
+        
+    # Print out what is left in DB
+    strBuilder = ""
+    entries = Info.query.order_by(Info.info).all() # Essentially, Info tells which database to query.
+    for entry in entries:
+        strBuilder += entry.toString()
+    strBuilder += '\n'
     return strBuilder
 
 
