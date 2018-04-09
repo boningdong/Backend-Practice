@@ -33,8 +33,9 @@ def bacon():
     return "Method used: " + request.method  # Return Method used
 
 # APIs practice
+# Model
 class Info(db.Model):
-    __tablename__ = "SaveStringTable"
+    __tablename__ = "StringTable"
     id = db.Column(db.Integer, primary_key=True)
     info = db.Column(db.String(100), nullable=False)
 
@@ -44,6 +45,9 @@ class Info(db.Model):
 
     def __repr__(self):
         return "Info id: {} str: {}".format(self.id, self,info)
+
+# Create all tables
+db.create_all()
 
 @app.route('/getstring/<string:str>', methods = ['POST'])
 def get_string(str):
