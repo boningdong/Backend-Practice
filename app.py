@@ -36,7 +36,7 @@ def bacon():
 # Model
 class Info(db.Model):
     __tablename__ = "StringTable"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, unique=False)
     info = db.Column(db.String(100), nullable=False)
 
     def __init__ (self, id, info):
