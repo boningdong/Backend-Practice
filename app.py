@@ -1,12 +1,24 @@
-# request in flask can check used method
+import os
 from flask import Flask, request
-
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
+# Config the database link
+DATABASE_URL = None
+if os.environ.get('DATABASE_URL') != None:
+    # The reason we use get here is environ['var'] will cause an exception, while get reutrn None for non-existing value.
+    DATABASE_URL = os.environ['DATABASE_URL']   # Get the URL of database from Heroku
+
+# Database configuration
+if DATABASE_URL != None:
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+    db = SQLAlchemy(app)
+
+
 @app.route('/')
 def index():
-    return "Method used: " + request.method # Return Method used
+    return "DATABASE_URL: " + DATABASE_URL
 
 @app.route('/profile/<username>')
 def profile(username):
