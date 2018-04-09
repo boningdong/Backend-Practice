@@ -60,7 +60,7 @@ def save_string(str):
     db.session.commit()
 
     strBuilder = ""
-    entries = db.session.query.all()
+    entries = db.session.query.order_by(Info.info).all()
     for entry in entries:
         strBuilder += str(entry)
 
