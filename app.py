@@ -64,8 +64,7 @@ def save_string(str):
     strBuilder = ""
     entries = Info.query.order_by(Info.info).all() # Essentially, Info tells which database to query.
     for entry in entries:
-        strBuilder += entry.toString()
-    strBuilder += '\n'
+        strBuilder += entry.toString() + '\n'
     return strBuilder
 
 @app.route('/removestring/<string:str>', methods = ['POST'])
@@ -74,16 +73,21 @@ def remove_string(str):
     if deleteItem != None:
         db.session.delete(deleteItem)
         db.session.commit()
-        
+
     # Print out what is left in DB
     strBuilder = ""
     entries = Info.query.order_by(Info.info).all() # Essentially, Info tells which database to query.
     for entry in entries:
-        strBuilder += entry.toString()
-    strBuilder += '\n'
+        strBuilder += entry.toString() + '\n'
     return strBuilder
 
-
+@app.route('/getstring/<string:name>', methods = ['GET'])
+def get_info(name):
+    getItem = Info.query.filter_by(info=name).first()
+    if deleteItem != None:
+        return "The item found is: " + getItem.toString()
+    else:
+        return "Cannot find the match item"
 
 
 if __name__ == "__main__":
