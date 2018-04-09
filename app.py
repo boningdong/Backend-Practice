@@ -84,7 +84,7 @@ def remove_string(str):
 @app.route('/getstring/<string:name>', methods = ['GET'])
 def get_info(name):
     getItem = Info.query.filter_by(info=name).first()
-    if deleteItem != None:
+    if getItem != None:
         return "The item found is: " + getItem.toString()
     else:
         return "Cannot find the match item"
