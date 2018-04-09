@@ -38,7 +38,7 @@ class Info(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     info = db.Column(db.String(100), nullable=False)
 
-    def Info (self, id, info):
+    def __init__ (self, id, info):
         self.id = id
         self.info = info
 
