@@ -36,7 +36,7 @@ def bacon():
 # Model
 class Info(db.Model):
     __tablename__ = "StringTable"
-    id = db.Column(db.Integer, unique=False)
+    id = db.Column(db.Integer, primary_key=True)
     info = db.Column(db.String(100), nullable=False)
 
     def __init__ (self, id, info):
@@ -55,7 +55,8 @@ def get_string(str):
 
 @app.route('/savestring/<string:str>', methods = ['POST'])
 def save_string(str):
-    info = Info(1, str) # This will save the data into database with id = 1.
+    max = db.session.query(db.func.max(Info.id)).scalar() # Get the max id
+    info = Info(max + 1, str) # This will save the data into database with id = max + 1.
     db.session.add(info)
     db.session.commit()
 
