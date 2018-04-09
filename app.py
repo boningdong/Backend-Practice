@@ -44,7 +44,7 @@ class Info(db.Model):
         self.info = info
 
     def toString(self):
-        return "Info id: {} str: {}".format(self.id, self,info)
+        return "Info id: {} str: {}".format(self.id, self.info)
 
 # Create all tables
 db.create_all()
