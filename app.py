@@ -43,7 +43,7 @@ class Info(db.Model):
         self.id = id
         self.info = info
 
-    def __repr__(self):
+    def __str__(self):
         return "Info id: {} str: {}".format(self.id, self,info)
 
 # Create all tables
@@ -61,7 +61,7 @@ def save_string(str):
     db.session.commit()
 
     strBuilder = ""
-    entries = Info.query.order_by(Info.info).all()
+    entries = Info.query.order_by(Info.info).all() # Essentially, Info tells which database to query.
     for entry in entries:
         strBuilder += str(entry)
 
